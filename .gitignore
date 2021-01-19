@@ -1,0 +1,49 @@
+﻿# See http://help.github.com/ignore-files/ for more about ignoring files.
+# Setting for folder angularCli.
+#package json file
+/angularCli/package-lock.json
+# compiled output
+/angularCli/dist
+/angularCli/tmp
+/angularCli/out-tsc
+
+# dependencies
+/angularCli/node_modules
+
+# IDEs and editors
+/angularCli/.idea
+/angularCli/.project
+/angularCli/.classpath
+/angularCli/.c9/
+/angularCli/*.launch
+/angularCli/.settings/
+/angularCli/*.sublime-workspace
+
+# IDE - VSCode
+/angularCli/.vscode/*
+/angularCli/!.vscode/settings.json
+/angularCli/!.vscode/tasks.json
+/angularCli/!.vscode/launch.json
+/angularCli/!.vscode/extensions.json
+
+# misc
+/angularCli/.sass-cache
+/angularCli/connect.lock
+/angularCli/coverage
+/angularCli/libpeerconnection.log
+/angularCli/npm-debug.log
+/angularCli/testem.log
+/angularCli/typings
+
+# e2e
+/angularCli/e2e/*.js
+/angularCli/e2e/*.map
+
+# System Files
+/angularCli/.DS_Store
+/angularCli/Thumbs.db
+
+
+# Setting for folder nodeServer.
+#ignore node module packages
+/nodeServer/node_modules
