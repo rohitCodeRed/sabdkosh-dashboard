@@ -1,6 +1,8 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import {DomSanitizer} from '@angular/platform-browser';
-import {MatIconRegistry} from '@angular/material';
+import {MatIconRegistry} from '@angular/material/icon';
+import { Chart } from 'angular-highcharts';
+import * as windowHighChart from 'highcharts';
 
 @Component({
   selector: 'app-inverted-area',
@@ -20,7 +22,7 @@ export class InvertedAreaComponent implements OnInit {
     // {"series":[{"setData":function(data:any){ return null;}}],
     //               "reflow":function(){return null;}};
 
-    area = {
+    area = new Chart({
       chart: {
           type: 'area',
           inverted: true
@@ -43,7 +45,7 @@ export class InvertedAreaComponent implements OnInit {
           y: 100,
           floating: true,
           borderWidth: 1,
-          backgroundColor: (window['highCharts'].theme && window['highCharts'].theme.legendBackgroundColor) || '#FFFFFF'
+          backgroundColor: (windowHighChart.theme && windowHighChart.theme.legend.backgroundColor) || '#FFFFFF'
       },
       xAxis: {
           categories: [
@@ -75,22 +77,18 @@ export class InvertedAreaComponent implements OnInit {
           name: 'Jane',
           data: [1, 3, 4, 3, 3, 5, 4]
       }]
-  };
-
-  changeValue(){
-
-
-  }
-  saveInstance(chartInstance): void {
-    this.chartInst = chartInstance;
-  }
+  } as any);
+  
   updateSeriesData(data:any): void {
     //console.log(this.chart);
     this.chartInst.series[0].setData(data);
   }
 
   ngOnInit() {
-    this.area = this.area;
+    //this.area = this.area;
+    this.area.ref$.subscribe(chartInstance => {
+      this.chartInst = chartInstance;
+    });
   }
 
 }
