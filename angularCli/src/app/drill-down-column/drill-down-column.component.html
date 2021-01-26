@@ -2,7 +2,7 @@
   <div class="row" style="margin:0px;">
     <div class="col-12 col-sm-12 col-md-12" >
       <div class="chartDiv">
-        <chart [options]="column" (click)="drillDownFunc($event)" (load)="saveInstance($event.context)"></chart>
+        <chart [chart]="column" (click)="drillDownFunc($event)"></chart>
         <div clas="row" *ngIf="isBack">
 
             <button type="button" mat-button (click)="updateDownDrill()">

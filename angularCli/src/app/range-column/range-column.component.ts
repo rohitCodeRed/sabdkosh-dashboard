@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import {DomSanitizer} from '@angular/platform-browser';
-import {MatIconRegistry} from '@angular/material';
+import {MatIconRegistry} from '@angular/material/icon';
+import { Chart } from 'angular-highcharts';
 
 @Component({
   selector: 'app-range-column',
@@ -20,7 +21,7 @@ export class RangeColumnComponent implements OnInit {
     // {"series":[{"setData":function(data:any){ return null;}}],
     //               "reflow":function(){return null;}};
 
-    column = {
+    column = new Chart({
       chart: {
           type: 'columnrange',
           inverted: true
@@ -79,7 +80,7 @@ export class RangeColumnComponent implements OnInit {
               [-9.0, 8.6]
           ]
       }]
-  };
+  } as any);
 
 
   saveInstance(chartInstance): void {
@@ -91,7 +92,7 @@ export class RangeColumnComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.column = this.column;
+    //this.column = this.column;
   }
 
 }

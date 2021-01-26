@@ -1,6 +1,8 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import {DomSanitizer} from '@angular/platform-browser';
-import {MatIconRegistry} from '@angular/material';
+import {MatIconRegistry} from '@angular/material/icon';
+import { Chart } from 'angular-highcharts';
+
 
 @Component({
   selector: 'app-drill-down-column',
@@ -229,7 +231,7 @@ export class DrillDownColumnComponent implements OnInit {
   };
 
 
-    column = {
+    column = new Chart({
         chart: {
             type: 'column'
         },
@@ -307,7 +309,7 @@ export class DrillDownColumnComponent implements OnInit {
             ]
         }]
 
-  };
+  } as any);
 
   drillDownFunc(e){
     console.log("clicked",e);
@@ -315,6 +317,7 @@ export class DrillDownColumnComponent implements OnInit {
         this.name = e.point.options.name;
         this.isBack = true;
         //this.chartInst.update({series:[this.dataArrDrilldown.drillDownData[this.name]]});
+        
         this.chartInst.series[0].update({name:this.name,colorByPoint:true},false);
         this.chartInst.redraw();
         this.chartInst.series[0].setData(this.dataArrDrilldown.drillDownData[this.name].data,false);
@@ -356,16 +359,16 @@ export class DrillDownColumnComponent implements OnInit {
       }
     }
 
-  saveInstance(chartInstance): void {
-    this.chartInst = chartInstance;
-  }
+  
   updateSeriesData(data:any): void {
     //console.log(this.chart);
     this.chartInst.series[0].setData(data);
   }
 
   ngOnInit() {
-    this.column = this.column;
+    this.column.ref$.subscribe(chartInstance => {
+        this.chartInst = chartInstance;
+      });
   }
 
 }

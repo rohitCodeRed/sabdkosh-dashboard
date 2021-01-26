@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import {DomSanitizer} from '@angular/platform-browser';
-import {MatIconRegistry} from '@angular/material';
+import {MatIconRegistry} from '@angular/material/icon';
+import { Chart } from 'angular-highcharts';
 
 @Component({
   selector: 'app-negative-bar',
@@ -27,7 +28,7 @@ export class NegativeBarComponent implements OnInit {
       '95-99', '100 + '
     ];
 
-    bar = {
+    bar = new Chart({
       chart: {
           type: 'bar'
         },
@@ -96,7 +97,7 @@ export class NegativeBarComponent implements OnInit {
               0.0
           ]
       }]
-  };
+  } as any);
 
   changeValue(){
 
@@ -111,7 +112,7 @@ export class NegativeBarComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.bar = this.bar;
+    //this.bar = this.bar;
   }
 
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import {DomSanitizer} from '@angular/platform-browser';
-import {MatIconRegistry} from '@angular/material';
+import {MatIconRegistry} from '@angular/material/icon';
+import { Chart } from 'angular-highcharts';
 
 @Component({
   selector: 'app-simple-column',
@@ -20,7 +21,7 @@ export class SimpleColumnComponent implements OnInit {
     // {"series":[{"setData":function(data:any){ return null;}}],
     //               "reflow":function(){return null;}};
 
-    column = {
+    column = new Chart({
         chart: {
           type: 'column'
       },
@@ -84,7 +85,7 @@ export class SimpleColumnComponent implements OnInit {
           data: [42.4, 33.2, 34.5, 39.7, 52.6, 75.5, 57.4, 60.4, 47.6, 39.1, 46.8, 51.1]
 
       }]
-  };
+  } as any);
 
 
   saveInstance(chartInstance): void {
@@ -96,7 +97,7 @@ export class SimpleColumnComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.column = this.column;
+    //this.column = this.column;
   }
 
 }

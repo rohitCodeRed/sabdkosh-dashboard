@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import {DomSanitizer} from '@angular/platform-browser';
-import {MatIconRegistry} from '@angular/material';
+import {MatIconRegistry} from '@angular/material/icon';
+import { Chart } from 'angular-highcharts';
 
 @Component({
   selector: 'app-rotated-column',
@@ -20,7 +21,7 @@ export class RotatedColumnComponent implements OnInit {
     // {"series":[{"setData":function(data:any){ return null;}}],
     //               "reflow":function(){return null;}};
 
-    column = {
+    column = new Chart({
     chart: {
         type: 'column'
     },
@@ -89,7 +90,7 @@ export class RotatedColumnComponent implements OnInit {
             }
         }
     }]
-  };
+  } as any);
 
   changeValue(){
 
@@ -104,7 +105,7 @@ export class RotatedColumnComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.column = this.column;
+    //this.column = this.column;
   }
 
 }

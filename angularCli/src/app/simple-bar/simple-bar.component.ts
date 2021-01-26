@@ -1,6 +1,8 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import {DomSanitizer} from '@angular/platform-browser';
-import {MatIconRegistry} from '@angular/material';
+import {MatIconRegistry} from '@angular/material/icon';
+import { Chart } from 'angular-highcharts';
+import * as windowHighChart from 'highcharts';
 
 @Component({
   selector: 'app-simple-bar',
@@ -20,7 +22,7 @@ export class SimpleBarComponent implements OnInit {
     // {"series":[{"setData":function(data:any){ return null;}}],
     //               "reflow":function(){return null;}};
 
-    bar = {
+    bar = new Chart({
         chart: {
           type: 'bar'
       },
@@ -64,7 +66,7 @@ export class SimpleBarComponent implements OnInit {
           y: 80,
           floating: true,
           borderWidth: 1,
-          backgroundColor: ((window['highCharts'].theme && window['highCharts'].theme.legendBackgroundColor) || '#FFFFFF'),
+          backgroundColor: ((windowHighChart.theme && windowHighChart.theme.legend.backgroundColor) || '#FFFFFF'),
           shadow: true
       },
       credits: {
@@ -83,22 +85,10 @@ export class SimpleBarComponent implements OnInit {
           name: 'Year 2016',
           data: [1216, 1001, 4436, 738, 40]
       }]
-  };
-
-  changeValue(){
-
-
-  }
-  saveInstance(chartInstance): void {
-    this.chartInst = chartInstance;
-  }
-  updateSeriesData(data:any): void {
-    //console.log(this.chart);
-    this.chartInst.series[0].setData(data);
-  }
+  } as any);
 
   ngOnInit() {
-    this.bar = this.bar;
+    //this.bar = this.bar;
   }
 
 }
