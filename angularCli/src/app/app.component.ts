@@ -1,11 +1,11 @@
 import { Component, OnInit} from '@angular/core';
 import {DomSanitizer} from '@angular/platform-browser';
-import {MatIconRegistry} from '@angular/material';
+import {MatIconRegistry} from '@angular/material/icon';
 import {Router, NavigationStart, ActivatedRoute} from '@angular/router';
 import { AuthenticationService } from './login.service';
 import { AlertService } from './alert.service';
-import 'rxjs/add/operator/filter';
-import 'rxjs/add/operator/map';
+//import 'rxjs/add/operator/filter';
+//import 'rxjs/add/operator/map';
 
 
 

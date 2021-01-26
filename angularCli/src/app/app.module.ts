@@ -10,7 +10,8 @@ import { AuthGuard } from './auth.guard';
 import { AppComponent } from './app.component';
 //import material animation
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatButtonModule, MatCheckboxModule} from '@angular/material';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatButtonModule} from '@angular/material/button';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatIconModule} from '@angular/material/icon';
 import {MatToolbarModule} from '@angular/material/toolbar';
@@ -25,9 +26,10 @@ import { FormsModule } from '@angular/forms';
 
 
 // imports to use highcharts
-import { ChartModule } from 'angular2-highcharts';
-import * as highcharts from 'highcharts';
-import { HighchartsStatic } from 'angular2-highcharts/dist/HighchartsService';
+import { ChartModule, HIGHCHARTS_MODULES } from 'angular-highcharts';
+import * as more from 'highcharts/highcharts-more.src';
+//import * as exporting from 'highcharts/modules/exporting.src';
+import * as solidGauge from 'highcharts/modules/solid-gauge.src'
 import { SolidGaugeComponent } from './solidGauge/solidGauge.component';
 import { AppRoutingModule } from './app-routing.module';
 import { OverviewComponent } from './overview/overview.component';
@@ -59,16 +61,18 @@ import { RegisterScreenComponent } from './register-screen/register-screen.compo
 import { AlertScreenComponent } from './alert-screen/alert-screen.component';
 //import { AuthGuardComponent } from './auth-guard/auth-guard.component';
 
+// const hc = require('highcharts');
+// window['highCharts'] = hc;
 
-export function highchartsfactory() {
-  const hc = require('highcharts');
-  window['highCharts'] = hc;
-  const hcm = require('highcharts/highcharts-more');
-  const sg = require('highcharts/modules/solid-gauge');
-  hcm(hc);
-  sg(hc);
-  return hc;
-}
+// export function highchartsfactory() {
+//   const hc = require('highcharts');
+//   window['highCharts'] = hc;
+//   const hcm = require('highcharts/highcharts-more');
+//   const sg = require('highcharts/modules/solid-gauge');
+//   hcm(hc);
+//   sg(hc);
+//   return hc;
+// }
 
 @NgModule({
   declarations: [
@@ -119,7 +123,7 @@ export function highchartsfactory() {
     MatMenuModule,
     FormsModule,
     AppRoutingModule,
-    NgbModule.forRoot()
+    NgbModule
   ],
   providers: [
    AuthGuard,
@@ -127,8 +131,8 @@ export function highchartsfactory() {
    AuthenticationService,
    RegisterService,
    {
-    provide: HighchartsStatic,
-    useFactory: highchartsfactory
+    provide: HIGHCHARTS_MODULES,
+    useFactory: () => [ more, solidGauge ]
   },
    ChartDataService
   ],
