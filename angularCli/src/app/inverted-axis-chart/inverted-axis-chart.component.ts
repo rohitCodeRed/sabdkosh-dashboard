@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import {DomSanitizer} from '@angular/platform-browser';
-import {MatIconRegistry} from '@angular/material';
+import {MatIconRegistry} from '@angular/material/icon';
+import { Chart } from 'angular-highcharts';
 
 @Component({
   selector: 'app-inverted-axis-chart',
@@ -14,7 +15,7 @@ export class InvertedAxisChartComponent implements OnInit {
   // {"series":[{"setData":function(data:any){ return null;}}],
   //               "reflow":function(){return null;}};
 
-  line = {
+  line = new Chart({
     chart: {
         type: 'spline',
         inverted: true
@@ -65,7 +66,7 @@ export class InvertedAxisChartComponent implements OnInit {
         data: [[0, 15], [10, -50], [20, -56.5], [30, -46.5], [40, -22.1],
             [50, -2.5], [60, -27.7], [70, -55.7], [80, -76.5]]
     }]
-  };
+  } as any);
 
   constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
     iconRegistry.addSvgIcon(
@@ -88,7 +89,7 @@ export class InvertedAxisChartComponent implements OnInit {
     }
 
     ngOnInit() {
-      this.line = this.line;
+      //this.line = this.line;
     }
 
 }

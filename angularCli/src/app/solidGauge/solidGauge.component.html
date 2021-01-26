@@ -2,7 +2,7 @@
   <div class="row" style="margin:0px;">
     <div class="col-12 col-sm-12 col-md-9" >
       <div class="chartDiv">
-        <chart [options]="gauge" (load)="saveInstance($event.context)"></chart>
+        <chart [chart]="gauge"></chart>
       </div>
     </div>
     <div class="col-12 col-sm-12 col-md-3">

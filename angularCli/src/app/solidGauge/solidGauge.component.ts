@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import {DomSanitizer} from '@angular/platform-browser';
-import {MatIconRegistry} from '@angular/material';
+import {MatIconRegistry} from '@angular/material/icon';
+import { Chart } from 'angular-highcharts';
 
 @Component({
   selector: 'app-chart',
@@ -14,7 +15,7 @@ export class SolidGaugeComponent implements OnInit {
   // {"series":[{"setData":function(data:any){ return null;}}],
   //               "reflow":function(){return null;}};
 
-  gauge = {
+  gauge = new Chart({
     chart: {
       type: 'solidgauge'
     },
@@ -78,7 +79,7 @@ export class SolidGaugeComponent implements OnInit {
       valueSuffix: ' km/h'
     }
   }]
-};
+} as any);
 
 constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
   iconRegistry.addSvgIcon(
@@ -87,28 +88,21 @@ constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
   }
 
   changeValue(){
-    this.gauge.series[0].data = [parseInt(this.value)];
+    let x = [parseInt(this.value)];
     //this.gauge.series[0].tooltip.valueSuffix = this.valueSuffix;
-    this.updateSeriesData(this.gauge.series[0].data);
+    this.updateSeriesData(x);
 
   }
-  saveInstance(chartInstance): void {
-    this.chartInst = chartInstance;
-  }
+  
   updateSeriesData(data:any): void {
     //console.log(this.chart);
-    this.chartInst.series[0].setData(data);
+    this.gauge.ref$.subscribe(chartInst => {
+      chartInst.series[0].setData(data);
+    });
   }
 
   ngOnInit() {
-    this.gauge = this.gauge;
+    //this.gauge = this.gauge;
   }
-  
-  // onResize(event) {
-  //   console.log("width: ",event.target.innerWidth);
-  //   console.log("height: ",event.target.innerHeight);
-  //   //this.chartInst.setSize(300, 300);
-  // }
-
 
 }
