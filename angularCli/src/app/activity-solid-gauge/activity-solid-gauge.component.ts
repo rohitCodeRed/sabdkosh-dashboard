@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import {DomSanitizer} from '@angular/platform-browser';
-import {MatIconRegistry} from '@angular/material';
+import {MatIconRegistry} from '@angular/material/icon';
+import { Chart } from 'angular-highcharts';
 
 @Component({
   selector: 'app-activity-solid-gauge',
@@ -80,7 +81,7 @@ export class ActivitySolidGaugeComponent implements OnInit {
   );
 }
 
-gauge = {
+gauge = new Chart({
       chart: {
           type: 'solidgauge',
           // height: '110%',
@@ -88,14 +89,12 @@ gauge = {
             render: this.renderIcons
           }
         },
-
       title: {
         text: 'Activity',
         style: {
           fontSize: '24px'
         }
       },
-
       tooltip: {
         borderWidth: 0,
         backgroundColor: 'none',
@@ -111,7 +110,6 @@ gauge = {
           };
         }
       },
-
       pane: {
         startAngle: 0,
         endAngle: 360,
@@ -134,14 +132,12 @@ gauge = {
           }
         ]
       },
-
       yAxis: {
         min: 0,
         max: 100,
         lineWidth: 0,
         tickPositions: []
       },
-
       plotOptions: {
         solidgauge: {
           dataLabels: {
@@ -152,24 +148,26 @@ gauge = {
           rounded: true
         }
       },
-
-      series: [{
-        name: 'Move',
-        data: [{
-          color: "#7cb5ec",
-          radius: '112%',
-          innerRadius: '88%',
-          y: 80
-        }]
-      }, {
-        name: 'Exercise',
-        data: [{
-          color: "#434348",
-          radius: '87%',
-          innerRadius: '63%',
-          y: 65
-        }]
-      }, {
+      series: [
+        {
+          name: 'Move',
+          data: [{
+            color: "#7cb5ec",
+            radius: '112%',
+            innerRadius: '88%',
+            y: 80
+          }]  
+        }, 
+        {
+          name: 'Exercise',
+          data: [{
+            color: "#434348",
+            radius: '87%',
+            innerRadius: '63%',
+            y: 65
+          }]
+        },
+        {
         name: 'Stand',
         data: [{
           color: "#90ed7d",
@@ -178,7 +176,7 @@ gauge = {
           y: 50
         }]
       }]
-};
+} as any);
 
 constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
   iconRegistry.addSvgIcon(
@@ -187,28 +185,28 @@ constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
   }
 
   changeValue(){
-    this.gauge.series[0].data[0].y = parseInt(this.value.outer);
-    this.gauge.series[1].data[0].y = parseInt(this.value.middle);
-    this.gauge.series[2].data[0].y = parseInt(this.value.inner);
+    let x = parseInt(this.value.outer);
+    let y = parseInt(this.value.middle);
+    let z = parseInt(this.value.inner);
     //this.gauge.series[0].tooltip.valueSuffix = this.valueSuffix;
-    this.updateSeriesData();
+    this.updateSeriesData(x,y,z);
 
   }
-  saveInstance(chartInstance): void {
-    this.chartInst = chartInstance;
-  }
-  updateSeriesData(): void {
+  
+  updateSeriesData(x,y,z): void {
     //console.log(this.chartInst.series[0].points[0]);
     //this.chartInst.series[0].points[0].update(40)
-
-    this.chartInst.series[0].points[0].update(this.gauge.series[0].data[0].y);
-    this.chartInst.series[1].points[0].update(this.gauge.series[1].data[0].y);
-    this.chartInst.series[2].points[0].update(this.gauge.series[2].data[0].y);
+    this.gauge.ref$.subscribe(chartInst => {
+      chartInst.series[0].points[0].update(x);
+      chartInst.series[1].points[0].update(y);
+      chartInst.series[2].points[0].update(z);
+    });
+    
 
   }
 
   ngOnInit() {
-    this.gauge = this.gauge;
+    //this.gauge = this.gauge;
   }
 
 }
