@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import {DomSanitizer} from '@angular/platform-browser';
-import {MatIconRegistry} from '@angular/material';
+import {MatIconRegistry} from '@angular/material/icon';
+import { Chart } from 'angular-highcharts';
 
 @Component({
   selector: 'app-ir-regular-time-chart',
@@ -14,7 +15,7 @@ export class IrRegularTimeChartComponent implements OnInit {
   // {"series":[{"setData":function(data:any){ return null;}}],
   //               "reflow":function(){return null;}};
 
-  line = {
+  line = new Chart({
     chart: {
        type: 'spline'
    },
@@ -175,7 +176,7 @@ export class IrRegularTimeChartComponent implements OnInit {
            [Date.UTC(1971, 4, 25), 0]
        ]
    }]
-  };
+  }as any);
 
   constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
     iconRegistry.addSvgIcon(
@@ -198,7 +199,7 @@ export class IrRegularTimeChartComponent implements OnInit {
     }
 
     ngOnInit() {
-      this.line = this.line;
+      //this.line = this.line;
     }
 
 }

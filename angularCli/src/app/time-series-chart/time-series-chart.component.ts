@@ -1,7 +1,8 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import {DomSanitizer} from '@angular/platform-browser';
-import {MatIconRegistry} from '@angular/material';
+import {MatIconRegistry} from '@angular/material/icon';
 import { ChartDataService } from '../chart-data.service';
+import { Chart } from 'angular-highcharts';
 
 @Component({
   selector: 'app-time-series-chart',
@@ -19,7 +20,7 @@ export class TimeSeriesChartComponent implements OnInit {
 
   //console.log("color",window['highCharts'].Color(window['highCharts'].getOptions().colors[0]).setOpacity(0).get('rgba'));
 
-  line = {
+  line = new Chart({
            chart: {
                zoomType: 'x'
            },
@@ -72,7 +73,7 @@ export class TimeSeriesChartComponent implements OnInit {
                name: 'USD to EUR',
                data: []
            }]
-  };
+  });
 
   constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer,private chartDataService: ChartDataService) {
     iconRegistry.addSvgIcon(
@@ -80,39 +81,28 @@ export class TimeSeriesChartComponent implements OnInit {
       sanitizer.bypassSecurityTrustResourceUrl('assets/rightArrow.svg'));
     }
 
-    changeValue(){
-      //this.gauge.series[0].data = [parseInt(this.value)];
-      //this.gauge.series[0].tooltip.valueSuffix = this.valueSuffix;
-      //this.updateSeriesData(this.gauge.series[0].data);
-
-    }
-    saveInstance(chartInstance): void {
-      this.chartInst = chartInstance;
-      this.getData();
-    }
-    updateSeriesData(data:any): void {
-      //console.log(this.chart);
-      //this.chartInst.series[0].setData(data);
-    }
-
     ngOnInit() {
-     this.line = this.line;
+     //this.line = this.line;
      //console.log("color",window['highCharts'].getOptions().colors[0]);
       //this.getData();
+      this.line.ref$.subscribe(chartInstance => {
+        this.chartInst = chartInstance;
+        this.getData(this.chartInst);
+      });
     }
 
-    getData():void {
+    getData(ChartObj):void {
       this.chartDataService.getChartData(this.url)
       .subscribe(Data => {
         // console.log("data",Data);
 
-        if(this.chartInst){
-          this.chartInst.update({
+        if(ChartObj){
+          ChartObj.update({
             plotOptions: {area: {
               fillColor: {
                 stops: [
-                    [0, window['highCharts'].getOptions().colors[0]],
-                    [1, window['highCharts'].Color(window['highCharts'].getOptions().colors[0]).setOpacity(0).get('rgba')]
+                    [0, '#2f7ed8'],
+                    [1, 'rgba(47, 126, 216, 0)']
                 ]
               }
             }},

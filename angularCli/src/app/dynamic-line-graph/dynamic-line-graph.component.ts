@@ -1,7 +1,9 @@
 import { Component, OnInit, Output, EventEmitter, Input,OnDestroy } from '@angular/core';
 import {DomSanitizer} from '@angular/platform-browser';
-import {MatIconRegistry} from '@angular/material';
-import { Observable, Subscription } from 'rxjs/Rx';
+import {MatIconRegistry} from '@angular/material/icon';
+import {Subscription ,timer} from 'rxjs';
+import { Chart } from 'angular-highcharts';
+
 
 @Component({
   selector: 'app-dynamic-line-graph',
@@ -18,7 +20,7 @@ export class DynamicLineGraphComponent implements OnInit,OnDestroy {
   // {"series":[{"setData":function(data:any){ return null;}}],
   //               "reflow":function(){return null;}};
 
-  line = {
+  line = new Chart({
     chart: {
         type: 'spline',
         animation: true, // don't animate in old IE
@@ -84,7 +86,7 @@ export class DynamicLineGraphComponent implements OnInit,OnDestroy {
             return data;
         }())
     }]
-  };
+  } as any);
 
   constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
     iconRegistry.addSvgIcon(
@@ -98,19 +100,19 @@ export class DynamicLineGraphComponent implements OnInit,OnDestroy {
       //this.updateSeriesData(this.gauge.series[0].data);
 
     }
-    saveInstance(chartInstance): void {
-      this.chartInst = chartInstance;
-      this.timer = Observable.timer(2000,1000);
-        // subscribing to a observable returns a subscription object
-        this.sub = this.timer.subscribe(t => this.addPoint());
-    }
-    updateSeriesData(data:any): void {
-      //console.log(this.chart);
-      //this.chartInst.series[0].setData(data);
-    }
 
     ngOnInit() {
-      this.line = this.line;
+      //this.line = this.line;
+      this.line.ref$.subscribe(chartInstance => {
+        this.chartInst = chartInstance;
+        
+      });
+
+      const source = timer(1000, 2000);
+        this.sub = source.subscribe(val => {
+        // do stuff you want when the interval ticks
+        this.addPoint();
+      });
 
     }
 

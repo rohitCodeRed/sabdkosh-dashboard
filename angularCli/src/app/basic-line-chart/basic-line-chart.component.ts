@@ -1,6 +1,8 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import {DomSanitizer} from '@angular/platform-browser';
-import {MatIconRegistry} from '@angular/material';
+import {MatIconRegistry} from '@angular/material/icon';
+import { Chart } from 'angular-highcharts';
+
 
 @Component({
   selector: 'app-basic-line-chart',
@@ -14,7 +16,7 @@ export class BasicLineChartComponent implements OnInit {
   // {"series":[{"setData":function(data:any){ return null;}}],
   //               "reflow":function(){return null;}};
 
-  line = {
+  line = new Chart({
     title: {
       text: 'Solar Employment Growth by Sector, 2010-2016'
     },
@@ -74,7 +76,7 @@ export class BasicLineChartComponent implements OnInit {
         }
       }]
     }
-  };
+  } as any);
 
   constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
     iconRegistry.addSvgIcon(
@@ -100,7 +102,7 @@ export class BasicLineChartComponent implements OnInit {
     }
 
     ngOnInit() {
-      this.line = this.line;
+      //this.line = this.line;
     }
 
 }
