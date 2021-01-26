@@ -1,7 +1,8 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import {DomSanitizer} from '@angular/platform-browser';
-import {MatIconRegistry} from '@angular/material';
+import {MatIconRegistry} from '@angular/material/icon';
 import { ChartDataService } from '../chart-data.service';
+import { Chart } from 'angular-highcharts';
 
 @Component({
   selector: 'app-pie-chart-legend',
@@ -14,7 +15,7 @@ export class PieChartLegendComponent implements OnInit {
   // {"series":[{"setData":function(data:any){ return null;}}],
   //               "reflow":function(){return null;}};
 
-  pie = {
+  pie = new Chart({
     chart: {
         plotBackgroundColor: null,
         plotBorderWidth: null,
@@ -62,7 +63,7 @@ export class PieChartLegendComponent implements OnInit {
             y: 7.05
         }]
     }]
-  };
+  } as any);
 
   constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
     iconRegistry.addSvgIcon(

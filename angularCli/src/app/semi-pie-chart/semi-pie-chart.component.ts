@@ -1,7 +1,8 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import {DomSanitizer} from '@angular/platform-browser';
-import {MatIconRegistry} from '@angular/material';
+import {MatIconRegistry} from '@angular/material/icon';
 import { ChartDataService } from '../chart-data.service';
+import { Chart } from 'angular-highcharts';
 
 @Component({
   selector: 'app-semi-pie-chart',
@@ -14,7 +15,7 @@ export class SemiPieChartComponent implements OnInit {
   // {"series":[{"setData":function(data:any){ return null;}}],
   //               "reflow":function(){return null;}};
 
-  pie = {
+  pie = new Chart({
     chart: {
         plotBackgroundColor: null,
         plotBorderWidth: 0,
@@ -63,7 +64,7 @@ export class SemiPieChartComponent implements OnInit {
             }
         ]
     }]
-  };
+  });
 
   constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
     iconRegistry.addSvgIcon(
@@ -89,7 +90,7 @@ export class SemiPieChartComponent implements OnInit {
     }
 
     ngOnInit() {
-      this.pie = this.pie;
+      //this.pie = this.pie;
     }
 
 }

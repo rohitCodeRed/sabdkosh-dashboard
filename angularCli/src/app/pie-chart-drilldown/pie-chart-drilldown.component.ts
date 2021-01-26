@@ -1,7 +1,8 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import {DomSanitizer} from '@angular/platform-browser';
-import {MatIconRegistry} from '@angular/material';
+import {MatIconRegistry} from '@angular/material/icon';
 import { ChartDataService } from '../chart-data.service';
+import { Chart } from 'angular-highcharts';
 
 @Component({
   selector: 'app-pie-chart-drilldown',
@@ -230,7 +231,7 @@ export class PieChartDrilldownComponent implements OnInit {
 };
 
 
-  pie = {
+  pie = new Chart({
     chart: {
         type: 'pie',
         animation: true
@@ -297,7 +298,7 @@ export class PieChartDrilldownComponent implements OnInit {
         ]
     }]
 
-  };
+  } as any);
 
 
   drillDownFunc(e){
@@ -347,19 +348,16 @@ export class PieChartDrilldownComponent implements OnInit {
       }
     }
 
-    saveInstance(chartInstance): void {
-      this.chartInst = chartInstance;
-      //window['highChart'].getOptions().colors[0];
-      //console.log(window['highCharts'].getOptions().colors[0]);
-      //console.log(this.chartInst);
-    }
+    
     updateSeriesData(data:any): void {
       //console.log(this.chart);
       //this.chartInst.series[0].setData(data);
     }
 
     ngOnInit() {
-      this.pie = this.pie;
+        this.pie.ref$.subscribe(chartInstance => {
+            this.chartInst = chartInstance;
+          });
     }
 
 }

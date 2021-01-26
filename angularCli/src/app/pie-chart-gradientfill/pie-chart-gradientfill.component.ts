@@ -1,7 +1,9 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import {DomSanitizer} from '@angular/platform-browser';
-import {MatIconRegistry} from '@angular/material';
+import {MatIconRegistry} from '@angular/material/icon';
 import { ChartDataService } from '../chart-data.service';
+import { Chart } from 'angular-highcharts';
+import * as windowHighChart from 'highcharts';
 
 @Component({
   selector: 'app-pie-chart-gradientfill',
@@ -13,9 +15,9 @@ export class PieChartGradientfillComponent implements OnInit {
   public chartInst: any;
   // {"series":[{"setData":function(data:any){ return null;}}],
   //               "reflow":function(){return null;}};
-
-  pie = {
-    colors: window['highCharts'].map(window['highCharts'].getOptions().colors, function (color) {
+  
+  pie = new Chart({
+    colors: windowHighChart.map(windowHighChart.getOptions().colors, function (color) {
         return {
             radialGradient: {
                 cx: 0.5,
@@ -24,7 +26,7 @@ export class PieChartGradientfillComponent implements OnInit {
             },
             stops: [
                 [0, color],
-                [1, window['highCharts'].Color(color).brighten(-0.3).get('rgb')] // darken
+                [1, new windowHighChart.Color(color).brighten(-0.3).get('rgb')] // darken
             ]
         };
       }),
@@ -48,7 +50,7 @@ export class PieChartGradientfillComponent implements OnInit {
                 enabled: true,
                 format: '<b>{point.name}</b>: {point.percentage:.1f} %',
                 style: {
-                    color: (window['highCharts'].theme && window['highCharts'].theme.contrastTextColor) || 'black'
+                    color: (windowHighChart.theme && windowHighChart.theme.colors[0]) || 'black'
                 },
                 connectorColor: 'silver'
             }
@@ -65,7 +67,7 @@ export class PieChartGradientfillComponent implements OnInit {
             { name: 'Other', y: 7.05 }
         ]
     }]
-  };
+  } as any);
 
   constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
     iconRegistry.addSvgIcon(
@@ -73,43 +75,10 @@ export class PieChartGradientfillComponent implements OnInit {
       sanitizer.bypassSecurityTrustResourceUrl('assets/rightArrow.svg'));
     }
 
-    changeValue(){
-      //this.gauge.series[0].data = [parseInt(this.value)];
-      //this.gauge.series[0].tooltip.valueSuffix = this.valueSuffix;
-      //this.updateSeriesData(this.gauge.series[0].data);
-
-    }
-
-    saveInstance(chartInstance): void {
-      this.chartInst = chartInstance;
-
-      // this.chartInst.setOptions({
-      //   colors: window['highCharts'].map(window['highCharts'].getOptions().colors, function (color) {
-      //     return {
-      //         radialGradient: {
-      //             cx: 0.5,
-      //             cy: 0.3,
-      //             r: 0.7
-      //         },
-      //         stops: [
-      //             [0, color],
-      //             [1, window['highCharts'].Color(color).brighten(-0.3).get('rgb')] // darken
-      //         ]
-      //     };
-      //   })
-      // });
-
-      //window['highChart'].getOptions().colors[0];
-      //console.log(window['highCharts'].getOptions().colors[0]);
-      //console.log(this.chartInst);
-    }
-    updateSeriesData(data:any): void {
-      //console.log(this.chart);
-      //this.chartInst.series[0].setData(data);
-    }
-
     ngOnInit() {
-      this.pie = this.pie;
+      this.pie.ref$.subscribe(chartInstance => {
+        this.chartInst = chartInstance;
+      });
     }
 
 }
