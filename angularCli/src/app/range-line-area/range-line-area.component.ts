@@ -1,6 +1,8 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import {DomSanitizer} from '@angular/platform-browser';
-import {MatIconRegistry} from '@angular/material';
+import {MatIconRegistry} from '@angular/material/icon';
+import { Chart } from 'angular-highcharts';
+import * as windowHighChart from 'highcharts';
 
 @Component({
   selector: 'app-range-line-area',
@@ -88,7 +90,7 @@ export class RangeLineAreaComponent implements OnInit {
         [1248998400000, 13.6]
     ];
 
-    area = {
+    area = new Chart({
           title: {
               text: 'July temperatures'
           },
@@ -119,7 +121,7 @@ export class RangeLineAreaComponent implements OnInit {
               marker: {
                   fillColor: 'white',
                   lineWidth: 2,
-                  lineColor: window['highCharts'].getOptions().colors[0]
+                  lineColor: windowHighChart.getOptions().colors[0]
               }
           }, {
               name: 'Range',
@@ -127,29 +129,17 @@ export class RangeLineAreaComponent implements OnInit {
               type: 'arearange',
               lineWidth: 0,
               linkedTo: ':previous',
-              color: window['highCharts'].getOptions().colors[0],
+              color:windowHighChart.getOptions().colors[0],
               fillOpacity: 0.3,
               zIndex: 0,
               marker: {
                   enabled: false
               }
           }]
-  };
-
-  changeValue(){
-
-
-  }
-  saveInstance(chartInstance): void {
-    this.chartInst = chartInstance;
-  }
-  updateSeriesData(data:any): void {
-    //console.log(this.chart);
-    this.chartInst.series[0].setData(data);
-  }
+  } as any);
 
   ngOnInit() {
-    this.area = this.area;
+    //this.area = this.area;
   }
 
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import {DomSanitizer} from '@angular/platform-browser';
-import {MatIconRegistry} from '@angular/material';
+import {MatIconRegistry} from '@angular/material/icon';
+import { Chart } from 'angular-highcharts';
 
 @Component({
   selector: 'app-negative-area',
@@ -20,7 +21,7 @@ export class NegativeAreaComponent implements OnInit {
     // {"series":[{"setData":function(data:any){ return null;}}],
     //               "reflow":function(){return null;}};
 
-    area = {
+    area = new Chart({
       chart: {
           type: 'area'
       },
@@ -43,7 +44,7 @@ export class NegativeAreaComponent implements OnInit {
           name: 'Joe',
           data: [3, 4, 4, -2, 5]
       }]
-  };
+  } as any);
 
 
   saveInstance(chartInstance): void {
@@ -55,7 +56,7 @@ export class NegativeAreaComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.area = this.area;
+    //this.area = this.area;
   }
 
 }

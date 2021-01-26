@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import {DomSanitizer} from '@angular/platform-browser';
-import {MatIconRegistry} from '@angular/material';
+import {MatIconRegistry} from '@angular/material/icon';
+import { Chart } from 'angular-highcharts';
 
 @Component({
   selector: 'app-simple-area',
@@ -20,7 +21,7 @@ export class SimpleAreaComponent implements OnInit {
     // {"series":[{"setData":function(data:any){ return null;}}],
     //               "reflow":function(){return null;}};
 
-    area = {
+    area = new Chart({
       chart: {
           type: 'area'
       },
@@ -92,7 +93,7 @@ export class SimpleAreaComponent implements OnInit {
               12600, 11400, 5500, 4512, 4502, 4502, 4500, 4500
           ]
       }]
-  };
+  } as any);
 
   changeValue(){
 
@@ -107,7 +108,7 @@ export class SimpleAreaComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.area = this.area;
+    //this.area = this.area;
   }
 
 }
