@@ -27,5 +27,15 @@ For Client side programming project uses **Angular** framework. It have **login*
 
 Your MongoDb instance will run on port 27017, Node server will run on http://localhost:3000 and Angular Client server will run on http://localhost:4200
 
-## Screen Shots
-* Server  
+## Server screen shots  
+![7XNeEHD](https://user-images.githubusercontent.com/35483024/105984149-be244480-60bf-11eb-9067-3f750b6eaaf2.png)
+![c2cbpEM](https://user-images.githubusercontent.com/35483024/105984164-c1b7cb80-60bf-11eb-8984-01cc5b3adf6a.png)  
+
+
+
+## Client screen shots  
+![LAyWbwg](https://user-images.githubusercontent.com/35483024/105984170-c3818f00-60bf-11eb-9432-b85d774ef04c.png)
+![gsfxOG6](https://user-images.githubusercontent.com/35483024/105984166-c2506200-60bf-11eb-877b-20c6c97b3b2c.png)
+![a0njljc](https://user-images.githubusercontent.com/35483024/105984157-bfee0800-60bf-11eb-9bc9-bd410c0bf4da.png)
+![BbOdfFd](https://user-images.githubusercontent.com/35483024/105984163-c0869e80-60bf-11eb-8636-20fd6199520e.png)
+
