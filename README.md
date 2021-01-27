@@ -1,5 +1,10 @@
 # sabdkosh-dashboard
-Project demostrate the sample chart dashboard, which contains both client side and server side code with database. Framework wise, Angular for client and NodeJs for server with Database MongoDB
+Project demostrate the sample chart dashboard, which contains both client side and server side code with database. Framework wise, **Angular** for client and **NodeJs** for server with Database **MongoDB**.  
+  
+For Server side programming it uses **NodeJs** with **Express** framework, through which all login and registration **REST Api** with **Bearer token Authentication** are developed.  
+
+For Client side programming project uses **Angular** framework. It have **login** and **registration** services with the help of **Http**, **Observable** modules. It also demonstrate all types of charts in **highCharts** npm module.  
+
 
 ## Prerequisites
 * Node (https://nodejs.org/en/)
