@@ -26,3 +26,6 @@ For Client side programming project uses **Angular** framework. It have **login*
 * Run the client server ` ng serve`
 
 Your MongoDb instance will run on port 27017, Node server will run on http://localhost:3000 and Angular Client server will run on http://localhost:4200
+
+## Screen Shots
+* Server  
