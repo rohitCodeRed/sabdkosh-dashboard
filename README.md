@@ -44,6 +44,10 @@ Your MongoDb instance will run on port 27017, Node server will run on http://loc
 
 Your MongoDb instance will run on port 27017, Node server will run on http://localhost:3000 and Angular Client server will run on http://localhost:4200
 
+## Installation and Running project with Docker
+ //TODO... 
+ 
+
 ## Server screen shots  
 ![7XNeEHD](https://user-images.githubusercontent.com/35483024/105984149-be244480-60bf-11eb-9067-3f750b6eaaf2.png)
 ![c2cbpEM](https://user-images.githubusercontent.com/35483024/105984164-c1b7cb80-60bf-11eb-8984-01cc5b3adf6a.png)  
