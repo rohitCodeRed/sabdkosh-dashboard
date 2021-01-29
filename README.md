@@ -13,16 +13,33 @@ For Client side programming project uses **Angular** framework. It have **login*
 
 
 
-## Installation Steps
+## Installation Steps for linux or MAC
+  Install all required software
+* Clone the project
+` git clone https://github.com/rohitCodeRed/sabdkosh-dashboard`
+* Change directory ` cd sabdkosh-dashboard/ `
+* Run the script ` sh installationScript.sh`
+* Start database MongoDB in seperate terminal ` mongod `
+* Go to directory nodeServer inseperate terminal ` cd  sabdkosh-dashboard/nodeServer`
+* Run the node server ` node index.js `
+* Open another terminal and go to directory ` cd sabdkosh-dashboard/angularCli`
+* Run the client server ` ng serve`
+
+Your MongoDb instance will run on port 27017, Node server will run on http://localhost:3000 and Angular Client server will run on http://localhost:4200
+
+## Installation Steps for Windows
   Install all required software
 * Clone the project
 ` git clone https://github.com/rohitCodeRed/sabdkosh-dashboard`
 * Change directory ` cd sabdkosh-dashboard `
-* Run the script ` sh installationScript.sh`
+* Go to directory ` cd sabdkosh-dashboard\angularCli`
+* Run `npm install`
+* Go to directory ` cd sabdkosh-dashboard\nodeServer`
+* Run `npm install`
 * Start database MongoDB in seperate terminal ` mongod `
-* Go to directory nodeServer inseperate terminal ` cd  nodeServer`
+* Go to directory nodeServer inseperate terminal ` cd  sabdkosh-dashboard\nodeServer`
 * Run the node server ` node index.js `
-* Open another terminal and go to directory ` cd angularCli`
+* Open another terminal and go to directory ` cd sabdkosh-dashboard\angularCli`
 * Run the client server ` ng serve`
 
 Your MongoDb instance will run on port 27017, Node server will run on http://localhost:3000 and Angular Client server will run on http://localhost:4200
