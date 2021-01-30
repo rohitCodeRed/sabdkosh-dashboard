@@ -33,7 +33,8 @@ export class RegisterScreenComponent {
                     this.router.navigate(['login']);
                 },
                 error => {
-                    this.alertService.error(error.message);
+                    console.log("On Register",error);
+                    this.alertService.error(error.error);
                     this.loading = false;
                 });
     }

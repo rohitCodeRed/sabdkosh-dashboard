@@ -40,13 +40,14 @@ export class LoginScreenComponent implements OnInit {
                             this.router.navigate([this.returnUrl]);
                             this.loading = true;
                         }else{
-                            this.alertService.error("Invalid User");
+                            this.alertService.error("Invalid user password or username");
                             this.loading = false;
                         }
                     
                 },
                 error => {
-                    this.alertService.error(error.message);
+                    console.log("On Login",error);
+                    this.alertService.error(error.error);
                     this.loading = false;
                 });
     }
