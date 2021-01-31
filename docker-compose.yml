@@ -1,0 +1,24 @@
+services:
+  nodeApp:
+    container_name: nodeApp
+    restart: always
+    build: ./nodeServer/
+    ports:
+      - "3000:3000"
+    links:
+      - mongo
+  mongo:
+    container_name: mongo
+    image: mongo
+    volumes:
+      - ./data:/data/db
+    ports:
+      - "27017:27017"
+  angularApp:
+    container_name: angularApp
+    restart: always
+    build: ./angularCli/
+    ports:
+      - "4200:4200"
+    links:
+      - nodeApp
