@@ -20,8 +20,10 @@ app.use(bodyParser.json({ type: 'application/json' }));
 app.set(port);
 
 //mongo db connection
+let timerId = setInterval(connectMongoDb, 2000);
 
-mongoose.connect(config.mongoDB_url);
+function connectMongoDb() {
+  mongoose.connect(config.mongoDB_url);
 //adding promise library to mongoose object..
 //mongoose.Promise = global.Promise;
 let db = mongoose.connection;
@@ -30,9 +32,17 @@ let db = mongoose.connection;
 //monitering connection of MongoDB
 db.then(function(result){
   console.log("\n**-----------MongoDB connection established------------**\n DB:",result.name,"\n Host:",result.host,"\n Port:",result.port);
+  console.log("Timer closed.");
+  clearInterval(timerId);
 },function(error){
-  console.log(error.message);
+  console.log("Mongo DB connection error: ",JSON.stringify(error.message));
+  console.log("\n\n-----Trying reconnecting... after 2 sec----");
 })
+}
+
+
+
+
 
 
 //allowing same origin api requests...
