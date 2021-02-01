@@ -1,11 +1,6 @@
-FROM node:latest
-RUN mkdir -p /usr/src/app
-COPY . /usr/src/app/
-WORKDIR /usr/src/app
-RUN npm install
-EXPOSE 4200
-CMD ["ng", "serve"]
-
+FROM nginx
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY dist/ /usr/share/nginx/html
 
 
 
