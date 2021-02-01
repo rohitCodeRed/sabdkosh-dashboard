@@ -1,12 +1,12 @@
 services:
-  nodeApp:
-    container_name: nodeApp
+  node_app:
+    container_name: node_app
     restart: always
-    build: ./nodeServer/
+    build: ./nodeServer/.
     ports:
-      - "3000:3000"
+      - "3001:3001"
     links:
-      - mongo
+      - mongo:database
   mongo:
     container_name: mongo
     image: mongo
@@ -14,11 +14,11 @@ services:
       - ./data:/data/db
     ports:
       - "27017:27017"
-  angularApp:
-    container_name: angularApp
+  angular_app:
+    container_name: angular_app
     restart: always
-    build: ./angularCli/
+    build: ./angularCli/.
     ports:
-      - "4200:4200"
+      - "4200:80"
     links:
-      - nodeApp
+      - node_app
