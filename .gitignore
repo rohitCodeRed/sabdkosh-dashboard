@@ -45,3 +45,6 @@
 # Setting for folder nodeServer.
 #ignore node module packages
 /nodeServer/node_modules
+
+#Mongo data mount point
+./data
