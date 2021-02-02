@@ -45,7 +45,19 @@ Your MongoDb instance will run on port 27017, Node server will run on http://loc
 Your MongoDb instance will run on port 27017, Node server will run on http://localhost:3000 and Angular Client server will run on http://localhost:4200
 
 ## Installation and Running project with Docker
- //TODO... 
+* Install Docker (https://docs.docker.com/engine/install/)  
+  
+  Both angular and node app docker image are pushed to Docker Hub
+  - https://hub.docker.com/r/docker0605/sabdkosh-dashboard_angular_app  
+  - https://hub.docker.com/r/docker0605/sabdkosh-dashboard_node_app  
+    
+* Run the command in directory /sabdkosh-dashboard `docker-compose up`  
+  
+  AngularCli app will run on http://localhost:4200  and NodeServer app will run on http://localhost:3001  
+    
+      
+        
+
  
 
 ## Server screen shots  
