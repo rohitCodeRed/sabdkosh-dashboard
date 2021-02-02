@@ -2,7 +2,7 @@ services:
   node_app:
     container_name: node_app
     restart: always
-    image: docker0605/sabdkosh-dashboard_node_app
+    build: ./nodeServer/.
     ports:
       - "3001:3001"
     links:
@@ -17,7 +17,7 @@ services:
   angular_app:
     container_name: angular_app
     restart: always
-    image: docker0605/sabdkosh-dashboard_angular_app
+    build: ./angularCli/.
     ports:
       - "4200:80"
     links:
